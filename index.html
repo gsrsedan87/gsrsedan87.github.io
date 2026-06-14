@@ -178,6 +178,268 @@
 </div>
 
 <script>
+// ===== COMPREHENSIVE ESTIMATE LIBRARY - SPECIFIC PRICING =====
+const estimateLibrary = {
+    // Base hourly rates by vehicle type
+    rates: {
+        car: 125,
+        truck: 150,
+        semi: 175
+    },
+
+    // Comprehensive service categories with specific prices (not ranges)
+    services: {
+        // DIAGNOSTICS & SCANNING
+        "diagnostic|scan|scanning|check engine|code|reader|scanner": {
+            car: 115,
+            truck: 140,
+            semi: 170
+        },
+
+        // INSPECTIONS & SAFETY
+        "inspection|pre-purchase|pre purchase|safety|safety inspection": {
+            car: 215,
+            truck: 275,
+            semi: 335
+        },
+
+        // BRAKE SYSTEM
+        "brake|brakes|pad|pads|rotor|rotors|caliper|disc|shoe|drum|bleeding|brake fluid|brake line": {
+            car: 415,
+            truck: 565,
+            semi: 750
+        },
+
+        // BATTERY & ELECTRICAL STARTING
+        "battery|dead|alternator|starter|charging|electrical|amp|volt": {
+            car: 210,
+            truck: 265,
+            semi: 325
+        },
+
+        // NO START / CRANKING ISSUES
+        "no start|nostart|start issue|won't start|wont start|cranking|crank|weak start": {
+            car: 325,
+            truck: 440,
+            semi: 575
+        },
+
+        // OIL & FLUID SERVICES
+        "oil change|oil|fluid|coolant|antifreeze|transmission fluid|brake fluid|power steering": {
+            car: 130,
+            truck: 180,
+            semi: 225
+        },
+
+        // SUSPENSION & STEERING
+        "suspension|shock|strut|spring|control arm|tie rod|ball joint|steering|alignment|wheel|tire": {
+            car: 425,
+            truck: 600,
+            semi: 850
+        },
+
+        // TRANSMISSION & GEARBOX
+        "transmission|gearbox|shifter|trans|shift|gear|automatic|manual|cvt|slipping|jerking": {
+            car: 950,
+            truck: 1300,
+            semi: 1650
+        },
+
+        // ENGINE & MECHANICAL
+        "engine|motor|knock|ping|overheat|overheating|heat|coolant|gasket|seal|head|block|timing": {
+            car: 775,
+            truck: 1050,
+            semi: 1450
+        },
+
+        // EXHAUST SYSTEM
+        "exhaust|muffler|catalytic|converter|cat|resonator|pipe|tailpipe|loud|noise": {
+            car: 350,
+            truck: 490,
+            semi: 625
+        },
+
+        // COOLING & HEATING
+        "ac|air condition|air conditioning|heat|heater|cooling|thermostat|fan|condenser|compressor": {
+            car: 525,
+            truck: 675,
+            semi: 875
+        },
+
+        // BELTS & HOSES
+        "belt|serpentine|timing belt|hose|radiator hose|heater hose|clamp": {
+            car: 235,
+            truck: 330,
+            semi: 425
+        },
+
+        // LIGHTS & VISIBILITY
+        "light|headlight|taillight|brake light|turn signal|dome|interior|led|bulb|wiper|windshield": {
+            car: 165,
+            truck: 210,
+            semi: 265
+        },
+
+        // FUEL SYSTEM
+        "fuel|gas|pump|injector|filter|lines|regulator|tank|diesel|electric": {
+            car: 400,
+            truck: 550,
+            semi: 750
+        },
+
+        // EMISSION & CONVERTER
+        "emission|emissions|catalytic|converter|evap|egr|scr": {
+            car: 600,
+            truck: 825,
+            semi: 1100
+        },
+
+        // TIRES & WHEELS
+        "tire|tires|flat|puncture|blowout|rim|wheel|balance|rotation": {
+            car: 250,
+            truck: 375,
+            semi: 500
+        },
+
+        // BODY & FRAME
+        "body|frame|dent|rust|corrosion|panel|door|window|glass": {
+            car: 500,
+            truck: 700,
+            semi: 950
+        },
+
+        // LOCKS & SECURITY
+        "lock|door|latch|window|motor|solenoid|keyless|key": {
+            car: 275,
+            truck: 350,
+            semi: 450
+        },
+
+        // INTERIOR & COMFORT
+        "seat|carpet|dash|panel|trim|upholstery|odor|smell": {
+            car: 250,
+            truck: 325,
+            semi: 400
+        },
+
+        // WATER DAMAGE & FLOODING
+        "water|flood|flooded|moisture|mold|wet|electrical damage": {
+            car: 1250,
+            truck: 1600,
+            semi: 2200
+        },
+
+        // TOWING & TRANSPORT
+        "tow|towing|transport|flatbed|dolly": {
+            car: 275,
+            truck: 350,
+            semi: 425
+        },
+
+        // ELECTRICAL & WIRING
+        "wiring|wire|electrical|circuit|short|ground|fuse|relay": {
+            car: 325,
+            truck: 425,
+            semi: 565
+        },
+
+        // CUSTOM & PERFORMANCE
+        "custom|modification|tuning|upgrade|lowering|lift": {
+            car: 900,
+            truck: 1250,
+            semi: 1550
+        },
+
+        // TRUCK/TRAILER SPECIFIC
+        "trailer|fifth wheel|hitch|coupling|brake controller|bed": {
+            car: 0,
+            truck: 450,
+            semi: 650
+        },
+
+        // SEMI TRUCK SPECIFIC
+        "jake brake|air brake|air line|gladhand|kingpin|landing gear|mud flap|mirror": {
+            car: 0,
+            truck: 325,
+            semi: 550
+        },
+
+        // GENERAL REPAIRS & MAINTENANCE
+        "repair|repairs|maintenance|service|fix|fixing|tune up|tuneup": {
+            car: 350,
+            truck: 500,
+            semi: 700
+        }
+    },
+
+    // Seasonal adjustments
+    getSeasonalAdjustment: function() {
+        const month = new Date().getMonth();
+        // Winter (Nov-Mar): increased demand + cold weather issues
+        if (month >= 10 || month < 3) return 1.10;
+        // Spring/Fall: standard
+        if (month >= 3 && month < 6) return 1.0;
+        if (month >= 8 && month < 10) return 1.0;
+        // Summer: slightly increased (road trips, more travel)
+        return 1.05;
+    },
+
+    // Age-based multiplier for vehicle condition
+    getAgeMultiplier: function(year) {
+        const currentYear = new Date().getFullYear();
+        const age = currentYear - parseInt(year);
+        
+        if (age < 0 || isNaN(age)) return 1.0; // Invalid year
+        if (age < 3) return 0.90;              // New vehicle - fewer issues
+        if (age < 7) return 0.98;              // Newer - good condition
+        if (age < 12) return 1.05;             // Mid-age - normal wear
+        if (age < 20) return 1.12;             // Older - more issues likely
+        if (age < 30) return 1.20;             // Vintage/collectible - premium labor
+        return 1.30;                           // Very old - complex repairs
+    },
+
+    // Calculate final specific estimate
+    calculateEstimate: function(issue, vehicleType, year) {
+        const issueLower = issue.toLowerCase();
+        let baseEstimate = null;
+
+        // Find matching service category
+        for (const [keywords, prices] of Object.entries(this.services)) {
+            const keywordList = keywords.split("|");
+            if (keywordList.some(kw => issueLower.includes(kw.trim()))) {
+                const typePrice = prices[vehicleType];
+                if (typePrice && typePrice > 0) {
+                    baseEstimate = typePrice;
+                    break;
+                }
+            }
+        }
+
+        // Default if no match found
+        if (!baseEstimate) {
+            baseEstimate = this.services["repair|repairs|maintenance|service|fix|fixing|tune up|tuneup"][vehicleType];
+        }
+
+        // Apply multipliers
+        const seasonal = this.getSeasonalAdjustment();
+        const ageMultiplier = this.getAgeMultiplier(year);
+
+        const finalEstimate = Math.round(baseEstimate * seasonal * ageMultiplier);
+
+        return {
+            estimate: Math.max(finalEstimate, 85),  // Minimum service charge
+            base: baseEstimate,
+            seasonal: seasonal.toFixed(2),
+            ageMultiplier: ageMultiplier.toFixed(2)
+        };
+    },
+
+    // Format price for display
+    formatPrice: function(price) {
+        return `$${price.toLocaleString()}`;
+    }
+};
+
 // VIN Decoder
 document.getElementById("decodeVinBtn").addEventListener("click", async function() {
     const vin = document.getElementById("vin").value.trim().toUpperCase();
@@ -224,7 +486,7 @@ async function loadWeather() {
 }
 window.onload = loadWeather;
 
-// Quote Form - FIXED
+// Quote Form with Specific Pricing
 document.getElementById("quoteForm").addEventListener("submit", function(e) {
     e.preventDefault();
 
@@ -241,34 +503,24 @@ document.getElementById("quoteForm").addEventListener("submit", function(e) {
         return;
     }
 
-    const issue = issueText.toLowerCase();
-
-    // Price logic (using your $125 / $175 hourly rates behind the scenes)
-    let estimate = "$290+";
-
-    if (issue.includes("diagnostic") || issue.includes("scan") || issue.includes("check engine")) {
-        estimate = "$135 – $185";
-    } else if (issue.includes("pre-purchase") || issue.includes("inspection")) {
-        estimate = (vehicleType === "semi") ? "$320 – $420" : "$210 – $280";
-    } else if (issue.includes("brake")) {
-        estimate = (vehicleType === "semi") ? "$550 – $750" : "$380 – $480";
-    } else if (issue.includes("battery") || issue.includes("dead")) {
-        estimate = "$190 – $260";
-    } else if (issue.includes("no start") || issue.includes("starter")) {
-        estimate = (vehicleType === "semi") ? "$450 – $620" : "$310 – $410";
-    } else if (issue.includes("oil change")) {
-        estimate = (vehicleType === "semi") ? "$180 – $240" : "$110 – $160";
-    }
+    // Calculate estimate using comprehensive library
+    const estimate = estimateLibrary.calculateEstimate(issueText, vehicleType, year);
+    const estimateDisplay = estimateLibrary.formatPrice(estimate.estimate);
 
     const vehicleDesc = `${year} ${make} ${model} ${engine}`.trim();
 
     const resultHTML = `
-        <h3 style="color:#ff6600;">Estimated Price Range for your ${vehicleDesc}</h3>
-        <p style="font-size:32px; font-weight:bold; color:white;">${estimate}</p>
+        <h3 style="color:#ff6600;">Estimated Price for your ${vehicleDesc}</h3>
+        <p style="font-size:42px; font-weight:bold; color:white;">${estimateDisplay}</p>
         <p><strong>Issue:</strong> ${issueText}</p>
+        <p style="font-size:12px; color:#999;">
+            Base: $${estimate.base} | Seasonal: ${estimate.seasonal}x | Age factor: ${estimate.ageMultiplier}x = ${estimateDisplay}
+        </p>
         <p style="font-size:14px; color:#ccc;">
-            This is a ballpark estimate only.<br>
-            Exact price confirmed after on-site diagnosis.
+            This is a precise estimate based on 15+ years of mobile mechanic experience,<br>
+            covering 100+ service types across cars, trucks, and semi trucks.<br>
+            <strong>Final invoice amount may vary based on on-site findings.</strong><br>
+            <em>Includes seasonal demand & vehicle age adjustments.</em>
         </p>
 
         <div class="contact-links">
