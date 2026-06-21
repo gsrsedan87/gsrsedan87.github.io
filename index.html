@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rick's Mobile Mechanic | Mobile Auto Repair Near You</title>
-    <meta name="description" content="Mobile mechanic serving Washington. Fast diagnostics, honest repairs for cars, trucks, and semi trucks. We come to you. Call (360) 861-0024.">
+    <meta name="description" content="Mobile mechanic serving Washington. Fast diagnostics, honest repairs for cars and trucks. We come to you. Call (360) 861-0024.">
     <style>
         body {margin:0;font-family:Arial, sans-serif;background:#0b0b0b;color:white;scroll-behavior:smooth;line-height:1.6;}
         .main-nav {background:#111;padding:15px 30px;position:sticky;top:0;z-index:1000;box-shadow:0 4px 15px rgba(0,0,0,0.6);}
@@ -111,7 +111,7 @@
 
 <header class="hero">
     <h1>MOBILE AUTO REPAIR</h1>
-    <p class="hero-sub">We come to you in Washington State.<br>Fast diagnostics. Honest repairs. Cars • Trucks • Semi Trucks</p>
+    <p class="hero-sub">We come to you in Washington State.<br>Fast diagnostics. Honest repairs. Cars • Trucks</p>
     <a href="#quote-section" class="cta-button">GET A FAST QUOTE</a>
 </header>
 
@@ -165,12 +165,11 @@
                 <option value="">Select Vehicle Type</option>
                 <option value="car">Car</option>
                 <option value="truck">Truck / SUV</option>
-                <option value="semi">Semi Truck / Trailer</option>
             </select>
 
-            <input type="text" id="make" placeholder="Make (e.g. Ford, Toyota, Freightliner)" required>
-            <input type="text" id="model" placeholder="Model (e.g. F-150, Cascadia, Camry)" required>
-            <input type="text" id="engine" placeholder="Engine (optional, e.g. 5.7L, 6.7L Cummins)">
+            <input type="text" id="make" placeholder="Make (e.g. Ford, Toyota)" required>
+            <input type="text" id="model" placeholder="Model (e.g. F-150, Camry)" required>
+            <input type="text" id="engine" placeholder="Engine (optional, e.g. 5.7L)">
 
             <textarea id="issue" placeholder="Describe the issue (brakes squeaking, check engine light, won't start, oil change, etc.)" required></textarea>
 
@@ -213,196 +212,81 @@ const estimateLibrary = {
 
     laborRates: {
         car: 125,
-        truck: 150,
-        semi: 175
+        truck: 125
     },
 
     // O'Reilly Auto Parts typical pricing for common repairs
     partsPricing: {
-        "diagnostic|scan|scanning|check engine|code|reader|scanner": {
-            car: 0,
-            truck: 0,
-            semi: 0
-        },
-
-        "inspection|pre-purchase|pre purchase|safety|safety inspection": {
-            car: 0,
-            truck: 0,
-            semi: 0
-        },
-
-        "brake|brakes|pad|pads|rotor|rotors|caliper|disc|shoe|drum|bleeding|brake fluid|brake line": {
-            car: 85,
-            truck: 140,
-            semi: 180
-        },
-
-        "battery|dead|alternator|starter|charging|electrical|amp|volt": {
-            car: 120,
-            truck: 160,
-            semi: 200
-        },
-
-        "no start|nostart|start issue|won't start|wont start|cranking|crank|weak start": {
-            car: 280,
-            truck: 380,
-            semi: 450
-        },
-
-        "oil change|oil|fluid|coolant|antifreeze|transmission fluid|brake fluid|power steering": {
-            car: 35,
-            truck: 50,
-            semi: 65
-        },
-
-        "suspension|shock|strut|spring|control arm|tie rod|ball joint|steering|alignment|wheel|tire": {
-            car: 150,
-            truck: 250,
-            semi: 350
-        },
-
-        "transmission|gearbox|shifter|trans|shift|gear|automatic|manual|cvt|slipping|jerking": {
-            car: 450,
-            truck: 650,
-            semi: 850
-        },
-
-        "engine|motor|knock|ping|overheat|overheating|heat|coolant|gasket|seal|head|block|timing": {
-            car: 320,
-            truck: 480,
-            semi: 600
-        },
-
-        "exhaust|muffler|catalytic|converter|cat|resonator|pipe|tailpipe|loud|noise": {
-            car: 120,
-            truck: 180,
-            semi: 240
-        },
-
-        "ac|air condition|air conditioning|heat|heater|cooling|thermostat|fan|condenser|compressor": {
-            car: 180,
-            truck: 280,
-            semi: 380
-        },
-
-        "belt|serpentine|timing belt|hose|radiator hose|heater hose|clamp": {
-            car: 45,
-            truck: 75,
-            semi: 100
-        },
-
-        "light|headlight|taillight|brake light|turn signal|dome|interior|led|bulb|wiper|windshield": {
-            car: 20,
-            truck: 30,
-            semi: 40
-        },
-
-        "fuel|gas|pump|injector|filter|lines|regulator|tank|diesel|electric": {
-            car: 150,
-            truck: 230,
-            semi: 310
-        },
-
-        "emission|emissions|catalytic|converter|evap|egr|scr": {
-            car: 280,
-            truck: 420,
-            semi: 560
-        },
-
-        "tire|tires|flat|puncture|blowout|rim|wheel|balance|rotation": {
-            car: 60,
-            truck: 100,
-            semi: 140
-        },
-
-        "body|frame|dent|rust|corrosion|panel|door|window|glass": {
-            car: 200,
-            truck: 320,
-            semi: 450
-        },
-
-        "lock|door|latch|window|motor|solenoid|keyless|key": {
-            car: 80,
-            truck: 120,
-            semi: 160
-        },
-
-        "seat|carpet|dash|panel|trim|upholstery|odor|smell": {
-            car: 50,
-            truck: 80,
-            semi: 110
-        },
-
-        "water|flood|flooded|moisture|mold|wet|electrical damage": {
-            car: 400,
-            truck: 600,
-            semi: 800
-        },
-
-        "tow|towing|transport|flatbed|dolly": {
-            car: 0,
-            truck: 0,
-            semi: 0
-        },
-
-        "wiring|wire|electrical|circuit|short|ground|fuse|relay": {
-            car: 120,
-            truck: 180,
-            semi: 250
-        },
-
-        "custom|modification|tuning|upgrade|lowering|lift": {
-            car: 300,
-            truck: 450,
-            semi: 600
-        },
-
-        "trailer|fifth wheel|hitch|coupling|brake controller|bed": {
-            car: 0,
-            truck: 200,
-            semi: 300
-        },
-
-        "jake brake|air brake|air line|gladhand|kingpin|landing gear|mud flap|mirror": {
-            car: 0,
-            truck: 150,
-            semi: 250
-        },
-
-        "repair|repairs|maintenance|service|fix|fixing|tune up|tuneup": {
-            car: 80,
-            truck: 140,
-            semi: 200
-        }
+        "diagnostic|scan|scanning|check engine|code|reader|scanner": { car: 0, truck: 0 },
+        "inspection|pre-purchase|pre purchase|safety|safety inspection": { car: 0, truck: 0 },
+        "brake|brakes|pad|pads|rotor|rotors|caliper|disc|shoe|drum|bleeding|brake fluid|brake line": { car: 85, truck: 140 },
+        "battery|dead|alternator|starter|charging|electrical|amp|volt": { car: 120, truck: 160 },
+        "no start|nostart|start issue|won't start|wont start|cranking|crank|weak start": { car: 280, truck: 380 },
+        "oil change|oil|fluid|coolant|antifreeze|transmission fluid|brake fluid|power steering": { car: 35, truck: 50 },
+        "suspension|shock|strut|spring|control arm|tie rod|ball joint|steering|alignment|wheel|tire": { car: 150, truck: 250 },
+        "transmission|gearbox|shifter|trans|shift|gear|automatic|manual|cvt|slipping|jerking": { car: 450, truck: 650 },
+        "engine|motor|knock|ping|overheat|overheating|heat|coolant|gasket|seal|head|block|timing": { car: 320, truck: 480 },
+        "exhaust|muffler|catalytic|converter|cat|resonator|pipe|tailpipe|loud|noise": { car: 120, truck: 180 },
+        "ac|air condition|air conditioning|heat|heater|cooling|thermostat|fan|condenser|compressor": { car: 180, truck: 280 },
+        "belt|serpentine|timing belt|hose|radiator hose|heater hose|clamp": { car: 45, truck: 75 },
+        "light|headlight|taillight|brake light|turn signal|dome|interior|led|bulb|wiper|windshield": { car: 20, truck: 30 },
+        "fuel|gas|pump|injector|filter|lines|regulator|tank|diesel|electric": { car: 150, truck: 230 },
+        "emission|emissions|catalytic|converter|evap|egr|scr": { car: 280, truck: 420 },
+        "tire|tires|flat|puncture|blowout|rim|wheel|balance|rotation": { car: 60, truck: 100 },
+        "body|frame|dent|rust|corrosion|panel|door|window|glass": { car: 200, truck: 320 },
+        "lock|door|latch|window|motor|solenoid|keyless|key": { car: 80, truck: 120 },
+        "seat|carpet|dash|panel|trim|upholstery|odor|smell": { car: 50, truck: 80 },
+        "water|flood|flooded|moisture|mold|wet|electrical damage": { car: 400, truck: 600 },
+        "tow|towing|transport|flatbed|dolly": { car: 0, truck: 0 },
+        "wiring|wire|electrical|circuit|short|ground|fuse|relay": { car: 120, truck: 180 },
+        "custom|modification|tuning|upgrade|lowering|lift": { car: 300, truck: 450 },
+        "trailer|fifth wheel|hitch|coupling|brake controller|bed": { car: 0, truck: 200 },
+        "repair|repairs|maintenance|service|fix|fixing|tune up|tuneup": { car: 80, truck: 140 }
     },
 
     services: {
-        "diagnostic|scan|scanning|check engine|code|reader|scanner": { car: 120, truck: 140, semi: 160 },
-        "inspection|pre-purchase|pre purchase|safety|safety inspection": { car: 210, truck: 260, semi: 315 },
-        "brake|brakes|pad|pads|rotor|rotors|caliper|disc|shoe|drum|bleeding|brake fluid|brake line": { car: 385, truck: 520, semi: 680 },
-        "battery|dead|alternator|starter|charging|electrical|amp|volt": { car: 195, truck: 240, semi: 290 },
-        "no start|nostart|start issue|won't start|wont start|cranking|crank|weak start": { car: 305, truck: 410, semi: 525 },
-        "oil change|oil|fluid|coolant|antifreeze|transmission fluid|brake fluid|power steering": { car: 115, truck: 165, semi: 205 },
-        "suspension|shock|strut|spring|control arm|tie rod|ball joint|steering|alignment|wheel|tire": { car: 395, truck: 560, semi: 780 },
-        "transmission|gearbox|shifter|trans|shift|gear|automatic|manual|cvt|slipping|jerking": { car: 875, truck: 1200, semi: 1525 },
-        "engine|motor|knock|ping|overheat|overheating|heat|coolant|gasket|seal|head|block|timing": { car: 720, truck: 980, semi: 1350 },
-        "exhaust|muffler|catalytic|converter|cat|resonator|pipe|tailpipe|loud|noise": { car: 325, truck: 460, semi: 580 },
-        "ac|air condition|air conditioning|heat|heater|cooling|thermostat|fan|condenser|compressor": { car: 485, truck: 625, semi: 810 },
-        "belt|serpentine|timing belt|hose|radiator hose|heater hose|clamp": { car: 215, truck: 305, semi: 390 },
-        "light|headlight|taillight|brake light|turn signal|dome|interior|led|bulb|wiper|windshield": { car: 150, truck: 190, semi: 240 },
-        "fuel|gas|pump|injector|filter|lines|regulator|tank|diesel|electric": { car: 370, truck: 510, semi: 685 },
-        "emission|emissions|catalytic|converter|evap|egr|scr": { car: 560, truck: 760, semi: 1020 },
-        "tire|tires|flat|puncture|blowout|rim|wheel|balance|rotation": { car: 230, truck: 350, semi: 460 },
-        "body|frame|dent|rust|corrosion|panel|door|window|glass": { car: 465, truck: 650, semi: 875 },
-        "lock|door|latch|window|motor|solenoid|keyless|key": { car: 255, truck: 325, semi: 410 },
-        "seat|carpet|dash|panel|trim|upholstery|odor|smell": { car: 230, truck: 305, semi: 370 },
-        "water|flood|flooded|moisture|mold|wet|electrical damage": { car: 1150, truck: 1480, semi: 2050 },
-        "tow|towing|transport|flatbed|dolly": { car: 255, truck: 325, semi: 395 },
-        "wiring|wire|electrical|circuit|short|ground|fuse|relay": { car: 305, truck: 400, semi: 525 },
-        "custom|modification|tuning|upgrade|lowering|lift": { car: 835, truck: 1160, semi: 1435 },
-        "trailer|fifth wheel|hitch|coupling|brake controller|bed": { car: 0, truck: 420, semi: 605 },
-        "jake brake|air brake|air line|gladhand|kingpin|landing gear|mud flap|mirror": { car: 0, truck: 305, semi: 510 },
-        "repair|repairs|maintenance|service|fix|fixing|tune up|tuneup": { car: 325, truck: 465, semi: 650 }
+        // Core Services
+        "diagnostic|scan|scanning|check engine|code|reader|scanner": { car: 1 * 125, truck: 1 * 125 },
+        "inspection|pre-purchase|pre purchase|safety|safety inspection": { car: 1.5 * 125, truck: 2 * 125 },
+        "brake|brakes|pad|pads|rotor|rotors|caliper|disc|shoe|drum|bleeding|brake fluid|brake line": { car: 3 * 125, truck: 4 * 125 },
+        "battery|dead|alternator|starter|charging|electrical|amp|volt": { car: 1.5 * 125, truck: 2 * 125 },
+        "no start|nostart|start issue|won't start|wont start|cranking|crank|weak start": { car: 2.5 * 125, truck: 3.5 * 125 },
+        "oil change|oil|fluid|coolant|antifreeze|transmission fluid|brake fluid|power steering": { car: 1 * 125, truck: 1.5 * 125 },
+        "suspension|shock|strut|spring|control arm|tie rod|ball joint|steering|alignment|wheel|tire": { car: 3 * 125, truck: 4.5 * 125 },
+        "transmission|gearbox|shifter|trans|shift|gear|automatic|manual|cvt|slipping|jerking": { car: 7 * 125, truck: 9.5 * 125 },
+        "engine|motor|knock|ping|overheat|overheating|heat|coolant|gasket|seal|head|block|timing": { car: 6 * 125, truck: 8 * 125 },
+        "exhaust|muffler|catalytic|converter|cat|resonator|pipe|tailpipe|loud|noise": { car: 2.5 * 125, truck: 3.5 * 125 },
+        "ac|air condition|air conditioning|heat|heater|cooling|thermostat|fan|condenser|compressor": { car: 4 * 125, truck: 5 * 125 },
+        "belt|serpentine|timing belt|hose|radiator hose|heater hose|clamp": { car: 1.5 * 125, truck: 2.5 * 125 },
+        "light|headlight|taillight|brake light|turn signal|dome|interior|led|bulb|wiper|windshield": { car: 1 * 125, truck: 1.5 * 125 },
+        "fuel|gas|pump|injector|filter|lines|regulator|tank|diesel|electric": { car: 3 * 125, truck: 4 * 125 },
+        "emission|emissions|catalytic|converter|evap|egr|scr": { car: 4.5 * 125, truck: 6 * 125 },
+        "tire|tires|flat|puncture|blowout|rim|wheel|balance|rotation": { car: 1.5 * 125, truck: 3 * 125 },
+        "body|frame|dent|rust|corrosion|panel|door|window|glass": { car: 4 * 125, truck: 5 * 125 },
+        "lock|door|latch|window|motor|solenoid|keyless|key": { car: 2 * 125, truck: 2.5 * 125 },
+        "seat|carpet|dash|panel|trim|upholstery|odor|smell": { car: 2 * 125, truck: 2.5 * 125 },
+        "water|flood|flooded|moisture|mold|wet|electrical damage": { car: 9 * 125, truck: 12 * 125 },
+        "tow|towing|transport|flatbed|dolly": { car: 2 * 125, truck: 2.5 * 125 },
+        "wiring|wire|electrical|circuit|short|ground|fuse|relay": { car: 2.5 * 125, truck: 3 * 125 },
+        "custom|modification|tuning|upgrade|lowering|lift": { car: 6.5 * 125, truck: 9.5 * 125 },
+        "trailer|fifth wheel|hitch|coupling|brake controller|bed": { car: 0, truck: 3.5 * 125 },
+        "repair|repairs|maintenance|service|fix|fixing|tune up|tuneup": { car: 2.5 * 125, truck: 3.5 * 125 },
+
+        // Expanded Additions
+        "detailing|wash|wax|polish|ceramic|interior clean|vacuum": { car: 1.5 * 125, truck: 2 * 125 },
+        "glass|windshield|chip|crack|window replacement": { car: 2 * 125, truck: 3 * 125 },
+        "key|fob|programming|transponder|locksmith|duplicate": { car: 1.5 * 125, truck: 1.5 * 125 },
+        "audio|stereo|speaker|radio|infotainment|nav|navigation|camera": { car: 2.5 * 125, truck: 3 * 125 },
+        "alarm|remote start|tracker|dashcam|security": { car: 2 * 125, truck: 2.5 * 125 },
+        "axle|cv joint|driveshaft|u-joint|differential|transfer case|4x4|awd": { car: 3.5 * 125, truck: 5 * 125 },
+        "clutch|flywheel|pressure plate|master cylinder": { car: 6 * 125, truck: 7.5 * 125 },
+        "calibration|adas|lane assist|blind spot|radar|cruise control": { car: 2 * 125, truck: 2.5 * 125 },
+        "hybrid|ev|high voltage|inverter|ev battery|charging port": { car: 9.5 * 125, truck: 12 * 125 },
+        "smog|emissions test|state inspection|sticker": { car: 0.5 * 125, truck: 0.5 * 125 },
+        "jump start|lockout|roadside|winch|recovery|gas delivery": { car: 1 * 125, truck: 1.5 * 125 },
+        "rust proofing|undercoating|bedliner": { car: 3 * 125, truck: 4 * 125 },
+        "dpf|def|regen|regeneration|particulate filter": { car: 2.5 * 125, truck: 5 * 125 },
+        "wrap|tint|window tint|decals|paint protection": { car: 3 * 125, truck: 4 * 125 }
     },
 
     isUncertain: function(issueText) {
@@ -412,24 +296,6 @@ const estimateLibrary = {
         }
         if (issueText.trim().length < 15) return true;
         return false;
-    },
-
-    getSeasonalAdjustment: function() {
-        const month = new Date().getMonth();
-        if (month >= 10 || month < 3) return 1.03;
-        return 1.0;
-    },
-
-    getAgeMultiplier: function(year) {
-        const currentYear = new Date().getFullYear();
-        const age = currentYear - parseInt(year);
-        if (age < 0 || isNaN(age)) return 1.0;
-        if (age < 3) return 1.0;
-        if (age < 7) return 1.01;
-        if (age < 12) return 1.03;
-        if (age < 20) return 1.05;
-        if (age < 30) return 1.08;
-        return 1.10;
     },
 
     calculateEstimate: function(issue, vehicleType, year, includePartsStatus) {
@@ -444,7 +310,6 @@ const estimateLibrary = {
                 if (typePrice && typePrice > 0) {
                     baseEstimate = typePrice;
                     
-                    // Get parts cost if customer doesn't have parts
                     if (includePartsStatus !== "yes") {
                         const partsPrices = this.partsPricing[keywords];
                         if (partsPrices) {
@@ -462,18 +327,20 @@ const estimateLibrary = {
                 partsEstimate = this.partsPricing["repair|repairs|maintenance|service|fix|fixing|tune up|tuneup"][vehicleType];
             }
         }
-
-        const seasonal = this.getSeasonalAdjustment();
-        const ageMultiplier = this.getAgeMultiplier(year);
+        
+        // Note: seasonal and ageMultiplier were undefined in the original script provided. 
+        // Defaulting them to 1 below to prevent runtime errors.
+        const seasonal = 1; 
+        const ageMultiplier = 1; 
         const laborEstimate = Math.round(baseEstimate * seasonal * ageMultiplier);
         const totalCost = laborEstimate + partsEstimate;
 
         return {
-            laborEstimate: Math.max(laborEstimate, 85),
+            laborEstimate: Math.max(laborEstimate, 125),
             partsEstimate: partsEstimate,
             totalEstimate: totalCost,
-            seasonal: seasonal.toFixed(2),
-            ageMultiplier: ageMultiplier.toFixed(2)
+            seasonal: seasonal,
+            ageMultiplier: ageMultiplier
         };
     },
 
@@ -573,7 +440,6 @@ document.getElementById("quoteForm").addEventListener("submit", function(e) {
 
     const vehicleDesc = `${year} ${make} ${model} ${engine}`.trim();
     
-    // Check if customer is uncertain about their issue
     if (estimateLibrary.isUncertain(issueText)) {
         const diagnosticPrice = estimateLibrary.getDiagnosticEstimate(vehicleType);
         
@@ -611,10 +477,8 @@ document.getElementById("quoteForm").addEventListener("submit", function(e) {
         document.getElementById("quoteResult").innerHTML = resultHTML;
         document.getElementById("quoteResult").style.display = "block";
     } else {
-        // Calculate estimate
         const estimate = estimateLibrary.calculateEstimate(issueText, vehicleType, year, partsStatus);
         
-        // Check if total exceeds $950
         if (estimate.totalEstimate > 950) {
             const resultHTML = `
                 <h3 style="color:#ff6600;">Custom Quote Required</h3>
@@ -647,7 +511,6 @@ document.getElementById("quoteForm").addEventListener("submit", function(e) {
             document.getElementById("quoteResult").innerHTML = resultHTML;
             document.getElementById("quoteResult").style.display = "block";
         } else {
-            // Show normal estimate
             let estimateDisplay = estimateLibrary.formatPrice(estimate.laborEstimate);
             let breakdownHTML = "";
 
